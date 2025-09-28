@@ -1,7 +1,7 @@
 {
   "id": "introduction",
   "title": "Introduction",
-  "description": "What is ENVOYOU?",
+  "description": "What is Envoyou SEC API?",
   "source": "@site/../docs/introduction.md",
   "sourceDirName": ".",
   "slug": "/introduction",
@@ -17,7 +17,7 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Welcome to Envoyou API Documentation",
+    "title": "Welcome to Envoyou SEC API Documentation",
     "permalink": "/docs/intro"
   },
   "next": {

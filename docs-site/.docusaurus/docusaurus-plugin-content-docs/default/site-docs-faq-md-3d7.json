@@ -1,7 +1,7 @@
 {
   "id": "faq",
-  "title": "Frequently Asked Questions (FAQ)",
-  "description": "This page contains answers to the most commonly asked questions about the Envoyou API.",
+  "title": "Frequently Asked Questions",
+  "description": "General Questions",
   "source": "@site/../docs/faq.md",
   "sourceDirName": ".",
   "slug": "/faq",
@@ -11,7 +11,10 @@
   "editUrl": "https://github.com/hk-dev13/doc-envoyou/tree/main/../docs/faq.md",
   "tags": [],
   "version": "current",
-  "frontMatter": {},
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "sidebar_position": 6
+  },
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Data Model Overview",

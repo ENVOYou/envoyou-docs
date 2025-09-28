@@ -1,7 +1,7 @@
 {
   "id": "api/authentication",
   "title": "Authentication",
-  "description": "Authentication Scheme",
+  "description": "Envoyou SEC API uses two primary authentication methods depending on the endpoint and use case.",
   "source": "@site/../docs/api/authentication.md",
   "sourceDirName": "api",
   "slug": "/api/authentication",

@@ -1,0 +1,18 @@
+{
+  "id": "guides/sec-compliance-guide",
+  "title": "SEC Climate Disclosure Compliance Guide",
+  "description": "This comprehensive guide walks you through implementing SEC Climate Disclosure compliance using the Envoyou SEC API.",
+  "source": "@site/../docs/guides/sec-compliance-guide.md",
+  "sourceDirName": "guides",
+  "slug": "/guides/sec-compliance-guide",
+  "permalink": "/docs/guides/sec-compliance-guide",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/hk-dev13/doc-envoyou/tree/main/../docs/guides/sec-compliance-guide.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  }
+}

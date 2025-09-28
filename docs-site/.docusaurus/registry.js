@@ -3,6 +3,7 @@ export default {
   "17896441": [() => import(/* webpackChunkName: "17896441" */ "@theme/DocItem"), "@theme/DocItem", require.resolveWeak("@theme/DocItem")],
   "1d57131a": [() => import(/* webpackChunkName: "1d57131a" */ "@site/../docs/api-reference.md"), "@site/../docs/api-reference.md", require.resolveWeak("@site/../docs/api-reference.md")],
   "23a4bd47": [() => import(/* webpackChunkName: "23a4bd47" */ "@site/../docs/api/authentication.md"), "@site/../docs/api/authentication.md", require.resolveWeak("@site/../docs/api/authentication.md")],
+  "32a27f35": [() => import(/* webpackChunkName: "32a27f35" */ "@site/../docs/guides/sec-compliance-guide.md"), "@site/../docs/guides/sec-compliance-guide.md", require.resolveWeak("@site/../docs/guides/sec-compliance-guide.md")],
   "338c8ba3": [() => import(/* webpackChunkName: "338c8ba3" */ "@site/../docs/api/openapi-plan.md"), "@site/../docs/api/openapi-plan.md", require.resolveWeak("@site/../docs/api/openapi-plan.md")],
   "39a8b4ac": [() => import(/* webpackChunkName: "39a8b4ac" */ "@site/../docs/guides/rate-limiting.md"), "@site/../docs/guides/rate-limiting.md", require.resolveWeak("@site/../docs/guides/rate-limiting.md")],
   "3abb1ae8": [() => import(/* webpackChunkName: "3abb1ae8" */ "@site/../docs/guides/webhooks.md"), "@site/../docs/guides/webhooks.md", require.resolveWeak("@site/../docs/guides/webhooks.md")],

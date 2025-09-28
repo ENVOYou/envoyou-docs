@@ -4,15 +4,15 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 export default [
   {
     path: '/docs',
-    component: ComponentCreator('/docs', 'e65'),
+    component: ComponentCreator('/docs', 'a10'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '465'),
+        component: ComponentCreator('/docs', '91b'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', 'c69'),
+            component: ComponentCreator('/docs', '01f'),
             routes: [
               {
                 path: '/docs/api-reference',
@@ -111,6 +111,11 @@ export default [
                 component: ComponentCreator('/docs/guides/sdks-libraries', '2d9'),
                 exact: true,
                 sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/guides/sec-compliance-guide',
+                component: ComponentCreator('/docs/guides/sec-compliance-guide', '0bc'),
+                exact: true
               },
               {
                 path: '/docs/guides/supabase-integration',

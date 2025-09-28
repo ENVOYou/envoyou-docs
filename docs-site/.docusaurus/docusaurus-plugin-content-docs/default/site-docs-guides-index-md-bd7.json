@@ -1,7 +1,7 @@
 {
   "id": "guides/index",
-  "title": "Guides & Tutorials",
-  "description": "Welcome to the Envoyou API Guides section! Here you'll find comprehensive tutorials, integration examples, and best practices to help you get the most out of our environmental data platform.",
+  "title": "Guides",
+  "description": "Comprehensive guides and tutorials for implementing SEC Climate Disclosure compliance with Envoyou SEC API.",
   "source": "@site/../docs/guides/index.md",
   "sourceDirName": "guides",
   "slug": "/guides/",
@@ -11,8 +11,8 @@
   "editUrl": "https://github.com/hk-dev13/doc-envoyou/tree/main/../docs/guides/index.md",
   "tags": [],
   "version": "current",
-  "sidebarPosition": 1,
+  "sidebarPosition": 5,
   "frontMatter": {
-    "sidebar_position": 1
+    "sidebar_position": 5
   }
 }

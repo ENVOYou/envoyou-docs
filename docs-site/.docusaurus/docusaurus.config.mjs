@@ -4,8 +4,8 @@
  * Modify the docusaurus.config.js file at your site's root instead.
  */
 export default {
-  "title": "Envoyou API Documentation",
-  "tagline": "Comprehensive Environmental Data API Platform",
+  "title": "Envoyou SEC API Documentation",
+  "tagline": "SEC Climate Disclosure Compliance API Platform",
   "favicon": "img/favicon.ico",
   "url": "https://docs.envoyou.com",
   "baseUrl": "/",
@@ -41,10 +41,11 @@ export default {
   "themeConfig": {
     "image": "img/android-chrome-512x512.png",
     "navbar": {
-      "title": "Envoyou API Docs",
+      "title": "Envoyou SEC API Docs",
       "logo": {
         "alt": "Envoyou Logo",
-        "src": "https://cdn.envoyou.com/logo-envoyou/svg/logo-icon.nb.svg"
+        "src": "https://cdn.envoyou.com/logo-envoyou/light-theme.svg",
+        "srcDark": "https://cdn.envoyou.com/logo-envoyou/dark-theme.svg"
       },
       "items": [
         {

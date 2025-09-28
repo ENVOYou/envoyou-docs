@@ -12,7 +12,7 @@ sidebar_position: 5
 
 ### POST /auth/login
 
-<span className="api-method post">POST</span> `/auth/login`
+**POST** `/auth/login`
 
 Authenticate user and get JWT tokens.
 
@@ -49,7 +49,7 @@ Authenticate user and get JWT tokens.
 
 ### POST /auth/register
 
-<span className="api-method post">POST</span> `/auth/register`
+**POST** `/auth/register`
 
 Register a new user account.
 
@@ -83,7 +83,7 @@ Register a new user account.
 
 ### POST /v1/emissions/calculate
 
-<span className="api-method post">POST</span> `/v1/emissions/calculate`
+**POST** `/v1/emissions/calculate`
 
 Calculate Scope 1 & 2 emissions with automatic audit trail.
 
@@ -135,7 +135,7 @@ Calculate Scope 1 & 2 emissions with automatic audit trail.
 
 ### GET /v1/emissions/factors
 
-<span className="api-method get">GET</span> `/v1/emissions/factors`
+**GET** `/v1/emissions/factors`
 
 Get available emission factors and sources.
 
@@ -170,7 +170,7 @@ Get available emission factors and sources.
 
 ### GET /v1/emissions/units
 
-<span className="api-method get">GET</span> `/v1/emissions/units`
+**GET** `/v1/emissions/units`
 
 Get supported units for emissions calculations.
 
@@ -194,7 +194,7 @@ Get supported units for emissions calculations.
 
 ### POST /v1/validation/epa
 
-<span className="api-method post">POST</span> `/v1/validation/epa`
+**POST** `/v1/validation/epa`
 
 Cross-validate emissions against EPA data.
 
@@ -246,9 +246,9 @@ Cross-validate emissions against EPA data.
 
 ## SEC Export Endpoints
 
-### GET /v1/export/sec/cevs/{company}
+### GET /v1/export/sec/cevs/\{company\}
 
-<span className="api-method get">GET</span> `/v1/export/sec/cevs/{company}`
+**GET** `/v1/export/sec/cevs/{company}`
 
 Export CEVS data for SEC filing.
 
@@ -281,7 +281,7 @@ Export CEVS data for SEC filing.
 
 ### POST /v1/export/sec/package
 
-<span className="api-method post">POST</span> `/v1/export/sec/package`
+**POST** `/v1/export/sec/package`
 
 Generate complete SEC filing package.
 
@@ -339,7 +339,7 @@ Generate complete SEC filing package.
 
 ### GET /user/profile
 
-<span className="api-method get">GET</span> `/user/profile`
+**GET** `/user/profile`
 
 Get user profile information.
 
@@ -362,7 +362,7 @@ Get user profile information.
 
 ### GET /user/api-keys
 
-<span className="api-method get">GET</span> `/user/api-keys`
+**GET** `/user/api-keys`
 
 List user's API keys.
 
@@ -388,7 +388,7 @@ List user's API keys.
 
 ### POST /user/api-keys
 
-<span className="api-method post">POST</span> `/user/api-keys`
+**POST** `/user/api-keys`
 
 Create new API key.
 
@@ -422,7 +422,7 @@ Create new API key.
 
 ### POST /v1/admin/mappings
 
-<span className="api-method post">POST</span> `/v1/admin/mappings`
+**POST** `/v1/admin/mappings`
 
 Create company-facility mapping.
 
@@ -446,7 +446,7 @@ Create company-facility mapping.
 
 ### GET /v1/audit
 
-<span className="api-method get">GET</span> `/v1/audit`
+**GET** `/v1/audit`
 
 Get audit trail entries.
 
@@ -490,7 +490,7 @@ Get audit trail entries.
 
 ### GET /health
 
-<span className="api-method get">GET</span> `/health`
+**GET** `/health`
 
 API health check.
 

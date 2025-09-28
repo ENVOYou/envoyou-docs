@@ -92,6 +92,10 @@
               "sidebar": "tutorialSidebar"
             },
             {
+              "id": "guides/sec-compliance-guide",
+              "path": "/docs/guides/sec-compliance-guide"
+            },
+            {
               "id": "guides/supabase-integration",
               "path": "/docs/guides/supabase-integration"
             },

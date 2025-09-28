@@ -1,7 +1,7 @@
 {
   "id": "intro",
-  "title": "Welcome to Envoyou API Documentation",
-  "description": "Welcome to the comprehensive documentation for Envoyou API - your gateway to global environmental data and verification services.",
+  "title": "Welcome to Envoyou SEC API Documentation",
+  "description": "Welcome to the comprehensive documentation for Envoyou SEC API - your specialized solution for SEC Climate Disclosure compliance.",
   "source": "@site/../docs/intro.md",
   "sourceDirName": ".",
   "slug": "/intro",
