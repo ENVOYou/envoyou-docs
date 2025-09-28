@@ -2,41 +2,47 @@
 sidebar_position: 1
 ---
 
-# Welcome to Envoyou API Documentation
+# Welcome to Envoyou SEC API Documentation
 
-Welcome to the comprehensive documentation for **Envoyou API** - your gateway to global environmental data and verification services.
+Welcome to the comprehensive documentation for **Envoyou SEC API** - your specialized solution for SEC Climate Disclosure compliance.
 
-## 🚀 What is Envoyou?
+## 🚀 What is Envoyou SEC API?
 
-Envoyou is a sophisticated API platform for global environmental data aggregation that calculates the **Composite Environmental Verification Score (CEVS)** - a standard metric for corporate environmental performance.
+Envoyou SEC API is a focused backend service designed specifically for **SEC Climate Disclosure compliance**. It provides auditable greenhouse gas (GHG) calculation, validation, and report export features tailored for public companies required to submit climate disclosures.
 
 ### Key Features
 
-- **Global Data Aggregation**: Access environmental data from EPA, EEA, ISO, EDGAR, and KLHK
-- **CEVS Scoring**: Automated calculation of environmental performance scores
-- **Real-time Updates**: Continuous data synchronization and verification
-- **Multi-Source Validation**: Cross-reference data from multiple authoritative sources
-- **Developer-Friendly**: RESTful API with comprehensive documentation
+- **GHG Emissions Calculator**: Scope 1 & 2 calculation with forensic-grade traceability
+- **EPA Cross-Validation**: Automatic comparison against public EPA datasets
+- **SEC Export Package**: Generate complete SEC filing packages (10-K friendly)
+- **Audit Trail**: Store inputs, calculation versions, factor sources, and timestamps
+- **Authentication & RBAC**: Supabase JWT integration with role-based access control
+- **Production Ready**: CI/CD, versioned migrations, and comprehensive testing
 
 ## 📋 Quick Start
 
 1. **Sign Up**: Create your account at [app.envoyou.com](https://app.envoyou.com)
 1. **Get API Key**: Generate your API key in the developer dashboard
-1. **Make Your First Request**: Start with our emissions data endpoint
+1. **Calculate Emissions**: Start with our emissions calculation endpoint
 
 ```bash
-curl -X GET "https://api.envoyou.com/v1/global/emissions?limit=10" \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-  -H "X-API-Key: YOUR_API_KEY"
+curl -X POST "https://api.envoyou.com/v1/emissions/calculate" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -d '{
+    "company": "Demo Corp",
+    "scope1": {"fuel_type": "natural_gas", "amount": 1000, "unit": "mmbtu"},
+    "scope2": {"kwh": 500000, "grid_region": "RFC"}
+  }'
 ```
 
 ## 📚 Documentation Structure
 
-- **[Introduction](./introduction.md)**: Learn about Envoyou's purpose and value proposition
+- **[Introduction](./introduction.md)**: Learn about SEC Climate Disclosure requirements
 - **[Getting Started](./getting-started.md)**: Step-by-step guide to get up and running
 - **[Authentication](./api/authentication.md)**: Understand our security and access control
 - **[API Reference](./api/api-reference.md)**: Complete endpoint documentation
-- **[Guides](/docs/guides/)**: Tutorials and integration examples
+- **[Guides](/docs/guides/)**: SEC compliance tutorials and integration examples
 - **[FAQ](./faq.md)**: Common questions and troubleshooting
 
 ## 🔗 Useful Links
@@ -47,17 +53,17 @@ curl -X GET "https://api.envoyou.com/v1/global/emissions?limit=10" \
 
 ## 🎯 Use Cases
 
-### For ESG Investors
-Evaluate environmental risk and performance of potential investments using standardized CEVS scores.
+### For Public Companies
+Meet SEC Climate Disclosure requirements with auditable Scope 1 & 2 emissions calculations.
 
-### For Supply Chain Managers
-Verify environmental compliance across your supply chain with automated data validation.
+### For ESG Consultants
+Provide clients with SEC-compliant emissions reporting and validation services.
 
-### For Regulators
-Monitor industry-wide environmental performance with aggregated, verified data.
+### For Auditors
+Access forensic-grade audit trails for emissions calculation verification.
 
 ### For Developers
-Build environmental applications with reliable, standardized data APIs.
+Build SEC compliance applications with reliable, standardized emissions APIs.
 
 ---
 

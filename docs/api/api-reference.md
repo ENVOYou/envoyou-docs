@@ -4,67 +4,17 @@ sidebar_position: 5
 
 # API Reference
 
-**Base URLs**  
-
-- Auth: `https://app.envoyou.com`
-- API: `https://api.envoyou.com`
+**Base URL**: `https://api.envoyou.com`
 
 ---
 
-## Endpoint /v1/auth/register
+## Authentication Endpoints
 
-<span className="api-method post">POST</span> `/v1/auth/register`
+### POST /auth/login
 
-Register a new user account.
+<span className="api-method post">POST</span> `/auth/login`
 
-**Authentication**: None required
-
-**Request Body**:
-```json
-{
-  "email": "john.doe@example.com",
-  "password": "SecurePass123!",
-  "name": "John Doe",
-  "company": "GreenTech Solutions",
-  "job_title": "Environmental Analyst"
-}
-```
-
-**Response (200)**:
-```json
-{
-  "success": true,
-  "message": "Registration successful. Please check your email to verify your account.",
-  "data": {
-    "email_sent": true,
-    "verification_required": true
-  }
-}
-```
-
-**Response (400)**:
-```json
-{
-  "success": false,
-  "error": "Password must be at least 8 characters with uppercase, lowercase, and number",
-  "data": null
-}
-```
-
-**Response (409)**:
-```json
-{
-  "success": false,
-  "error": "Email already registered",
-  "data": null
-}
-```
-
-## Endpoint /v1/auth/login
-
-<span className="api-method post">POST</span> `/v1/auth/login`
-
-Authenticate user and get tokens.
+Authenticate user and get JWT tokens.
 
 **Authentication**: None required
 
@@ -97,320 +47,489 @@ Authenticate user and get tokens.
 }
 ```
 
-**Response (401)**:
+### POST /auth/register
+
+<span className="api-method post">POST</span> `/auth/register`
+
+Register a new user account.
+
+**Authentication**: None required
+
+**Request Body**:
 ```json
 {
-  "success": false,
-  "error": "Invalid email or password",
-  "data": null
+  "email": "john.doe@example.com",
+  "password": "SecurePass123!",
+  "name": "John Doe",
+  "company": "GreenTech Solutions"
 }
-```
-
-**Response (403)**:
-```json
-{
-  "success": false,
-  "error": "Account not verified. Please check your email.",
-  "data": null
-}
-```
-
-## Other Data Endpoints
-
-### /v1/global/emissions
-
-<span className="api-method get">GET</span> `/v1/global/emissions`
-
-Get US emissions data.
-
-**Authentication**: API Key required
-
-**Query Parameters**:
-- `state`: string (optional) - Filter by state (e.g., "CA", "TX", "NY")
-- `year`: integer (optional) - Filter by year (e.g., 2023)
-- `pollutant`: string (optional) - Filter by pollutant (e.g., "CO2", "NOx", "SO2")
-- `limit`: integer (default 50, max 100) - Number of results to return
-
-**Example Request**:
-```bash
-GET /v1/global/emissions?state=CA&year=2023&pollutant=CO2&limit=10
 ```
 
 **Response (200)**:
 ```json
 {
   "success": true,
-  "message": "Emissions data retrieved successfully",
-  "data": [
-    {
-      "facility_id": "fac_001",
-      "facility_name": "Green Valley Power Plant",
-      "state": "CA",
-      "city": "Sacramento",
-      "year": 2023,
-      "pollutant": "CO2",
-      "emissions_tons": 1250.75,
-      "unit": "tons",
-      "source": "EPA CAMPD",
-      "last_updated": "2024-01-15T10:30:00Z"
-    },
-    {
-      "facility_id": "fac_002",
-      "facility_name": "Mountain View Manufacturing",
-      "state": "CA",
-      "city": "Fresno",
-      "year": 2023,
-      "pollutant": "CO2",
-      "emissions_tons": 890.32,
-      "unit": "tons",
-      "source": "EPA CAMPD",
-      "last_updated": "2024-01-15T10:30:00Z"
-    }
-  ],
-  "total": 2,
-  "has_more": true
+  "message": "Registration successful. Please check your email to verify your account.",
+  "data": {
+    "email_sent": true,
+    "verification_required": true
+  }
 }
 ```
 
-**Response (400)**:
-```json
-{
-  "success": false,
-  "error": "Invalid state parameter. Must be a valid US state code.",
-  "data": null
-}
-```
+---
 
-**Response (401)**:
-```json
-{
-  "success": false,
-  "error": "Invalid API key",
-  "data": null
-}
-```
+## Emissions Calculation Endpoints
 
-### /v1/global/eea/renewables
+### POST /v1/emissions/calculate
 
-<span className="api-method get">GET</span> `/v1/global/eea/renewables`
+<span className="api-method post">POST</span> `/v1/emissions/calculate`
 
-Get EEA renewable energy data.
+Calculate Scope 1 & 2 emissions with automatic audit trail.
 
 **Authentication**: API Key required
 
-**Query Parameters**:
-- `country`: string (optional) - Filter by country code (e.g., "DE", "FR", "ES")
-- `year`: integer (optional) - Filter by year (e.g., 2023)
-- `limit`: integer (default 50, max 100) - Number of results to return
-
-**Example Request**:
-```bash
-GET /v1/global/eea/renewables?country=DE&year=2023&limit=5
+**Request Body**:
+```json
+{
+  "company": "Demo Corp",
+  "scope1": {
+    "fuel_type": "natural_gas",
+    "amount": 1000,
+    "unit": "mmbtu"
+  },
+  "scope2": {
+    "kwh": 500000,
+    "grid_region": "RFC"
+  }
+}
 ```
 
 **Response (200)**:
 ```json
 {
-  "success": true,
-  "message": "EEA renewable energy data retrieved successfully",
-  "data": [
-    {
-      "country_code": "DE",
-      "country_name": "Germany",
-      "year": 2023,
-      "renewable_type": "Solar",
-      "capacity_mw": 67000,
-      "generation_gwh": 52000,
-      "share_percent": 12.5,
-      "source": "EEA",
-      "last_updated": "2024-02-01T08:00:00Z"
+  "status": "success",
+  "data": {
+    "company": "Demo Corp",
+    "scope1_emissions": {
+      "co2_tons": 53.02,
+      "fuel_type": "natural_gas",
+      "amount": 1000,
+      "unit": "mmbtu",
+      "emission_factor": 0.05302,
+      "factor_source": "EPA"
     },
-    {
-      "country_code": "DE",
-      "country_name": "Germany",
-      "year": 2023,
-      "renewable_type": "Wind",
-      "capacity_mw": 68000,
-      "generation_gwh": 135000,
-      "share_percent": 28.3,
-      "source": "EEA",
-      "last_updated": "2024-02-01T08:00:00Z"
-    }
-  ],
-  "total": 2,
-  "has_more": true
+    "scope2_emissions": {
+      "co2_tons": 225.5,
+      "kwh": 500000,
+      "grid_region": "RFC",
+      "emission_factor": 0.000451,
+      "factor_source": "EPA eGRID"
+    },
+    "total_emissions": 278.52,
+    "calculation_id": "calc_12345",
+    "timestamp": "2025-01-15T10:30:00Z"
+  }
 }
 ```
 
-**Response (400)**:
-```json
-{
-  "success": false,
-  "error": "Invalid country code. Must be a valid ISO country code.",
-  "data": null
-}
-```
+### GET /v1/emissions/factors
 
-### /v1/global/iso/certifications
+<span className="api-method get">GET</span> `/v1/emissions/factors`
 
-<span className="api-method get">GET</span> `/v1/global/iso/certifications`
-
-Get ISO 14001 certifications.
+Get available emission factors and sources.
 
 **Authentication**: API Key required
 
 **Query Parameters**:
-- `country`: string (optional) - Filter by country code (e.g., "US", "DE", "JP")
-- `year`: integer (optional) - Filter by certification year (e.g., 2023)
-- `limit`: integer (default 50, max 100) - Number of results to return
+- `fuel_type`: string (optional) - Filter by fuel type
+- `source`: string (optional) - Filter by source (EPA, EDGAR)
 
-**Example Request**:
-```bash
-GET /v1/global/iso/certifications?country=US&year=2023&limit=10
+**Response (200)**:
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "fuel_type": "natural_gas",
+      "emission_factor": 0.05302,
+      "unit": "tons_co2_per_mmbtu",
+      "source": "EPA",
+      "last_updated": "2024-01-01T00:00:00Z"
+    },
+    {
+      "fuel_type": "coal",
+      "emission_factor": 0.09552,
+      "unit": "tons_co2_per_mmbtu",
+      "source": "EPA",
+      "last_updated": "2024-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+### GET /v1/emissions/units
+
+<span className="api-method get">GET</span> `/v1/emissions/units`
+
+Get supported units for emissions calculations.
+
+**Authentication**: API Key required
+
+**Response (200)**:
+```json
+{
+  "status": "success",
+  "data": {
+    "fuel_units": ["mmbtu", "therms", "gallons", "tons"],
+    "electricity_units": ["kwh", "mwh"],
+    "emission_units": ["tons_co2", "kg_co2", "lbs_co2"]
+  }
+}
+```
+
+---
+
+## EPA Validation Endpoints
+
+### POST /v1/validation/epa
+
+<span className="api-method post">POST</span> `/v1/validation/epa`
+
+Cross-validate emissions against EPA data.
+
+**Authentication**: API Key required
+
+**Request Body**:
+```json
+{
+  "company": "Demo Corp",
+  "scope1": {
+    "fuel_type": "natural_gas",
+    "amount": 1000,
+    "unit": "mmbtu"
+  },
+  "scope2": {
+    "kwh": 500000,
+    "grid_region": "RFC"
+  }
+}
 ```
 
 **Response (200)**:
 ```json
 {
-  "success": true,
-  "message": "ISO 14001 certifications retrieved successfully",
-  "data": [
-    {
-      "company_name": "EcoManufacturing Inc.",
-      "country_code": "US",
-      "country_name": "United States",
-      "certification_number": "ISO14001-2023-001",
-      "issue_date": "2023-03-15",
-      "expiry_date": "2026-03-14",
-      "certification_body": "ANSI",
-      "scope": "Manufacturing of sustainable products",
-      "status": "active",
-      "source": "ISO",
-      "last_updated": "2024-01-20T12:00:00Z"
+  "status": "success",
+  "data": {
+    "company": "Demo Corp",
+    "validation_result": {
+      "status": "validated",
+      "total_calculated": 278.52,
+      "epa_comparison": {
+        "facilities_found": 2,
+        "avg_emissions": 285.1,
+        "deviation_percent": -2.3,
+        "within_threshold": true
+      },
+      "recommendations": [
+        "Emissions within expected range for similar facilities",
+        "Consider reviewing Scope 2 calculations for accuracy"
+      ]
     },
-    {
-      "company_name": "GreenTech Solutions LLC",
-      "country_code": "US",
-      "country_name": "United States",
-      "certification_number": "ISO14001-2023-002",
-      "issue_date": "2023-05-20",
-      "expiry_date": "2026-05-19",
-      "certification_body": "ANSI",
-      "scope": "Environmental consulting services",
-      "status": "active",
-      "source": "ISO",
-      "last_updated": "2024-01-20T12:00:00Z"
-    }
-  ],
-  "total": 2,
-  "has_more": true
+    "validation_id": "val_12345",
+    "timestamp": "2025-01-15T10:35:00Z"
+  }
 }
 ```
 
-**Response (404)**:
-```json
-{
-  "success": false,
-  "error": "No ISO certifications found for the specified criteria",
-  "data": null
-}
-```
+---
 
-### /v1/permits/search
+## SEC Export Endpoints
 
-<span className="api-method get">GET</span> `/v1/permits/search`
+### GET /v1/export/sec/cevs/{company}
 
-Search Indonesian environmental permits.
+<span className="api-method get">GET</span> `/v1/export/sec/cevs/{company}`
+
+Export CEVS data for SEC filing.
 
 **Authentication**: API Key required
 
-**Query Parameters**:
-- `province`: string (optional) - Filter by province (e.g., "DKI Jakarta", "Jawa Barat")
-- `company`: string (optional) - Filter by company name (e.g., "PT ABC", "CV XYZ")
-- `permit_type`: string (optional) - Filter by permit type (e.g., "AMDAL", "UKL-UPL", "SPPL")
-- `limit`: integer (default 50, max 100) - Number of results to return
+**Parameters**:
+- `company`: string (required) - Company name
 
-**Example Request**:
-```bash
-GET /v1/permits/search?province=DKI%20Jakarta&company=PT%20ABC&permit_type=AMDAL&limit=5
+**Response (200)**:
+```json
+{
+  "status": "success",
+  "data": {
+    "company": "Demo Corp",
+    "cevs_data": {
+      "scope1_emissions": 53.02,
+      "scope2_emissions": 225.5,
+      "total_emissions": 278.52,
+      "calculation_date": "2025-01-15",
+      "methodology": "EPA emission factors",
+      "verification_status": "EPA validated"
+    },
+    "sec_format": {
+      "table_format": "10-K compliant",
+      "export_date": "2025-01-15T10:40:00Z"
+    }
+  }
+}
+```
+
+### POST /v1/export/sec/package
+
+<span className="api-method post">POST</span> `/v1/export/sec/package`
+
+Generate complete SEC filing package.
+
+**Authentication**: API Key required
+
+**Request Body**:
+```json
+{
+  "company": "Demo Corp",
+  "scope1": {
+    "fuel_type": "natural_gas",
+    "amount": 1000,
+    "unit": "mmbtu"
+  },
+  "scope2": {
+    "kwh": 500000,
+    "grid_region": "RFC"
+  }
+}
 ```
 
 **Response (200)**:
 ```json
 {
-  "success": true,
-  "message": "Environmental permits retrieved successfully",
-  "data": [
-    {
-      "permit_id": "permit_001",
-      "permit_number": "KLHK-AMDAL-2023-001",
-      "company_name": "PT ABC Manufacturing",
-      "permit_type": "AMDAL",
-      "province": "DKI Jakarta",
-      "city": "Jakarta Pusat",
-      "issue_date": "2023-06-15",
-      "expiry_date": "2028-06-14",
-      "status": "active",
-      "facility_address": "Jl. Industri No. 123, Jakarta Pusat",
-      "latitude": -6.2088,
-      "longitude": 106.8456,
-      "environmental_impact": "Low",
-      "source": "KLHK",
-      "last_updated": "2024-01-10T09:00:00Z"
-    },
-    {
-      "permit_id": "permit_002",
-      "permit_number": "KLHK-UKLUPL-2023-045",
-      "company_name": "PT ABC Manufacturing",
-      "permit_type": "UKL-UPL",
-      "province": "DKI Jakarta",
-      "city": "Jakarta Pusat",
-      "issue_date": "2023-08-20",
-      "expiry_date": "2025-08-19",
-      "status": "active",
-      "facility_address": "Jl. Industri No. 123, Jakarta Pusat",
-      "latitude": -6.2088,
-      "longitude": 106.8456,
-      "environmental_impact": "Very Low",
-      "source": "KLHK",
-      "last_updated": "2024-01-10T09:00:00Z"
-    }
-  ],
-  "total": 2,
-  "has_more": true
+  "status": "success",
+  "data": {
+    "package_id": "pkg_12345",
+    "company": "Demo Corp",
+    "files": [
+      {
+        "filename": "emissions_calculation.json",
+        "type": "calculation_data",
+        "size_bytes": 2048
+      },
+      {
+        "filename": "audit_trail.csv",
+        "type": "audit_data",
+        "size_bytes": 1024
+      },
+      {
+        "filename": "sec_filing_table.csv",
+        "type": "sec_format",
+        "size_bytes": 512
+      }
+    ],
+    "download_url": "https://api.envoyou.com/downloads/pkg_12345.zip",
+    "expires_at": "2025-01-22T10:45:00Z"
+  }
 }
 ```
 
-**Response (400)**:
+---
+
+## User Management Endpoints
+
+### GET /user/profile
+
+<span className="api-method get">GET</span> `/user/profile`
+
+Get user profile information.
+
+**Authentication**: Bearer Token required
+
+**Response (200)**:
 ```json
 {
-  "success": false,
-  "error": "Invalid permit_type. Must be one of: AMDAL, UKL-UPL, SPPL",
-  "data": null
+  "success": true,
+  "data": {
+    "id": "user_12345",
+    "email": "john.doe@example.com",
+    "name": "John Doe",
+    "company": "GreenTech Solutions",
+    "tier": "premium",
+    "created_at": "2025-01-01T00:00:00Z"
+  }
 }
 ```
 
-## Request & Response Format
+### GET /user/api-keys
 
-All requests use JSON format. All responses follow the consistent Envoyou format:
+<span className="api-method get">GET</span> `/user/api-keys`
+
+List user's API keys.
+
+**Authentication**: Bearer Token required
+
+**Response (200)**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "key_12345",
+      "name": "Production Key",
+      "key_prefix": "evo_prod_",
+      "tier": "premium",
+      "permissions": ["emissions:calculate", "validation:epa", "export:sec"],
+      "created_at": "2025-01-01T00:00:00Z",
+      "last_used_at": "2025-01-15T10:30:00Z"
+    }
+  ]
+}
+```
+
+### POST /user/api-keys
+
+<span className="api-method post">POST</span> `/user/api-keys`
+
+Create new API key.
+
+**Authentication**: Bearer Token required
+
+**Request Body**:
+```json
+{
+  "name": "SEC Compliance Key",
+  "permissions": ["emissions:calculate", "validation:epa", "export:sec"]
+}
+```
+
+**Response (201)**:
+```json
+{
+  "success": true,
+  "data": {
+    "id": "key_67890",
+    "name": "SEC Compliance Key",
+    "api_key": "evo_sec_1234567890abcdef",
+    "permissions": ["emissions:calculate", "validation:epa", "export:sec"],
+    "created_at": "2025-01-15T10:45:00Z"
+  }
+}
+```
+
+---
+
+## Admin Endpoints (Premium)
+
+### POST /v1/admin/mappings
+
+<span className="api-method post">POST</span> `/v1/admin/mappings`
+
+Create company-facility mapping.
+
+**Authentication**: Bearer Token required (Admin role)
+
+**Request Body**:
+```json
+{
+  "company_name": "Demo Corp",
+  "facilities": [
+    {
+      "name": "Main Plant",
+      "epa_facility_id": "12345",
+      "address": "123 Industrial Blvd",
+      "latitude": 40.7128,
+      "longitude": -74.0060
+    }
+  ]
+}
+```
+
+### GET /v1/audit
+
+<span className="api-method get">GET</span> `/v1/audit`
+
+Get audit trail entries.
+
+**Authentication**: Bearer Token required (Admin/Inspector role)
+
+**Query Parameters**:
+- `company`: string (optional) - Filter by company
+- `start_date`: string (optional) - Start date (ISO format)
+- `end_date`: string (optional) - End date (ISO format)
+- `limit`: integer (optional) - Number of results (default: 50)
+
+**Response (200)**:
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "id": "audit_12345",
+      "company": "Demo Corp",
+      "calculation_id": "calc_12345",
+      "inputs": {
+        "scope1": {"fuel_type": "natural_gas", "amount": 1000},
+        "scope2": {"kwh": 500000, "grid_region": "RFC"}
+      },
+      "factors_used": {
+        "natural_gas": 0.05302,
+        "electricity_rfc": 0.000451
+      },
+      "timestamp": "2025-01-15T10:30:00Z",
+      "user_id": "user_12345"
+    }
+  ],
+  "total": 1,
+  "has_more": false
+}
+```
+
+---
+
+## Health Check
+
+### GET /health
+
+<span className="api-method get">GET</span> `/health`
+
+API health check.
+
+**Authentication**: None required
+
+**Response (200)**:
+```json
+{
+  "status": "success",
+  "data": {
+    "status": "healthy",
+    "timestamp": "2025-01-15T10:50:00Z",
+    "version": "1.0.0",
+    "environment": "production"
+  }
+}
+```
+
+---
+
+## Response Format
+
+All responses follow the consistent Envoyou format:
 
 **Success Response (200)**:
 ```json
 {
-  "success": true,
-  "message": "Operation completed successfully",
+  "status": "success",
   "data": {
-    // Response data (object or array)
+    // Response data
   },
-  "total": 10,        // For list endpoints
-  "has_more": true    // For paginated endpoints
+  "message": "Operation completed successfully"
 }
 ```
 
-**Error Response (4xx)**:
+**Error Response (4xx/5xx)**:
 ```json
 {
-  "success": false,
+  "status": "error",
   "error": "Error description",
   "data": null
 }
@@ -418,11 +537,11 @@ All requests use JSON format. All responses follow the consistent Envoyou format
 
 **Common HTTP Status Codes**:
 - `200`: Success
+- `201`: Created
 - `400`: Bad Request (invalid parameters)
 - `401`: Unauthorized (invalid/missing API key or token)
 - `403`: Forbidden (insufficient permissions)
 - `404`: Not Found (resource doesn't exist)
-- `409`: Conflict (resource already exists)
 - `429`: Too Many Requests (rate limit exceeded)
 - `500`: Internal Server Error
 

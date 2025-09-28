@@ -9,7 +9,7 @@ sidebar_position: 3
 ### 1. Register Account
 - Visit [app.envoyou.com](https://app.envoyou.com/)
 - Click [Sign Up](https://app.envoyou.com/auth/register)
-- Enter email, password (min 8 characters with uppercase, lowercase, numbers), name, company (optional)
+- Enter email, password (min 8 characters with uppercase, lowercase, numbers), name, company
 - Verify email via sent link
 
 ### 2. Login
@@ -19,40 +19,72 @@ sidebar_position: 3
 ### 3. Get API Key
 - After login, go to Developer Dashboard
 - Select tier: Basic (free), Premium, Enterprise
-- Generate API key for data endpoint authentication
+- Generate API key for SEC API endpoint authentication
 
-## Quickstart
+## SEC Compliance Quickstart
 
-### Using cURL
+### Step 1: Calculate Emissions
 
-**Register**:
+**Using cURL**:
 ```bash
-curl -X POST https://api.envoyou.com/v1/auth/register \
+curl -X POST https://api.envoyou.com/v1/emissions/calculate \
   -H "Content-Type: application/json" \
+  -H "X-API-Key: YOUR_API_KEY" \
   -d '{
-    "email": "user@example.com",
-    "password": "Password123",
-    "name": "John Doe",
-    "company": "Example Corp"
+    "company": "Demo Corp",
+    "scope1": {
+      "fuel_type": "natural_gas",
+      "amount": 1000,
+      "unit": "mmbtu"
+    },
+    "scope2": {
+      "kwh": 500000,
+      "grid_region": "RFC"
+    }
   }'
 ```
 
-**Login**:
+### Step 2: Validate Against EPA
+
 ```bash
-curl -X POST https://api.envoyou.com/v1/auth/login \
+curl -X POST https://api.envoyou.com/v1/validation/epa \
   -H "Content-Type: application/json" \
+  -H "X-API-Key: YOUR_API_KEY" \
   -d '{
-    "email": "user@example.com",
-    "password": "Password123"
+    "company": "Demo Corp",
+    "scope1": {
+      "fuel_type": "natural_gas",
+      "amount": 1000,
+      "unit": "mmbtu"
+    },
+    "scope2": {
+      "kwh": 500000,
+      "grid_region": "RFC"
+    }
   }'
 ```
 
-**Get Data**:
+### Step 3: Generate SEC Package
+
 ```bash
-curl -X GET "https://api.envoyou.com/v1/global/emissions?limit=10" \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-  -H "X-API-Key: YOUR_API_KEY"
+curl -X POST https://api.envoyou.com/v1/export/sec/package \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -d '{
+    "company": "Demo Corp",
+    "scope1": {
+      "fuel_type": "natural_gas",
+      "amount": 1000,
+      "unit": "mmbtu"
+    },
+    "scope2": {
+      "kwh": 500000,
+      "grid_region": "RFC"
+    }
+  }'
 ```
+
+## Programming Language Examples
 
 ### Using Python
 
@@ -60,26 +92,38 @@ curl -X GET "https://api.envoyou.com/v1/global/emissions?limit=10" \
 import requests
 
 # Login
-response = requests.post('https://api.envoyou.com/v1/auth/login', json={
+response = requests.post('https://api.envoyou.com/auth/login', json={
     'email': 'user@example.com',
     'password': 'Password123'
 })
 token = response.json()['access_token']
 
-# Get data
+# Calculate emissions
 headers = {
     'Authorization': f'Bearer {token}',
-    'X-API-Key': 'YOUR_API_KEY'
+    'X-API-Key': 'YOUR_API_KEY',
+    'Content-Type': 'application/json'
 }
-data = requests.get('https://api.envoyou.com/v1/global/emissions', headers=headers)
-print(data.json())
+
+emissions_data = {
+    "company": "Demo Corp",
+    "scope1": {"fuel_type": "natural_gas", "amount": 1000, "unit": "mmbtu"},
+    "scope2": {"kwh": 500000, "grid_region": "RFC"}
+}
+
+result = requests.post(
+    'https://api.envoyou.com/v1/emissions/calculate',
+    headers=headers,
+    json=emissions_data
+)
+print(result.json())
 ```
 
 ### Using JavaScript
 
 ```javascript
 // Login
-const loginResponse = await fetch('https://api.envoyou.com/v1/auth/login', {
+const loginResponse = await fetch('https://api.envoyou.com/auth/login', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -89,13 +133,37 @@ const loginResponse = await fetch('https://api.envoyou.com/v1/auth/login', {
 });
 const { access_token } = await loginResponse.json();
 
-// Get data
-const dataResponse = await fetch('https://api.envoyou.com/v1/global/emissions', {
+// Calculate emissions
+const emissionsData = {
+  company: "Demo Corp",
+  scope1: { fuel_type: "natural_gas", amount: 1000, unit: "mmbtu" },
+  scope2: { kwh: 500000, grid_region: "RFC" }
+};
+
+const result = await fetch('https://api.envoyou.com/v1/emissions/calculate', {
+  method: 'POST',
   headers: {
     'Authorization': `Bearer ${access_token}`,
-    'X-API-Key': 'YOUR_API_KEY'
-  }
+    'X-API-Key': 'YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(emissionsData)
 });
-const data = await dataResponse.json();
+
+const data = await result.json();
 console.log(data);
+```
+
+## Authentication Methods
+
+### API Key Authentication
+For most SEC API endpoints, use API Key authentication:
+```bash
+-H "X-API-Key: YOUR_API_KEY"
+```
+
+### JWT Bearer Token
+For user-specific operations and admin endpoints:
+```bash
+-H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```

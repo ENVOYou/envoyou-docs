@@ -1,267 +1,161 @@
-# Frequently Asked Questions (FAQ)
+---
+sidebar_position: 6
+---
 
-This page contains answers to the most commonly asked questions about the Envoyou API.
+# Frequently Asked Questions
 
-## Getting Started
+## General Questions
 
-### What is Envoyou?
+### What is Envoyou SEC API?
+Envoyou SEC API is a specialized backend service designed for SEC Climate Disclosure compliance. It provides auditable greenhouse gas (GHG) calculation, EPA cross-validation, and SEC-ready export capabilities for public companies required to submit climate disclosures.
 
-Envoyou is a comprehensive API platform that provides user authentication, profile management, and data services for modern web applications. It handles the complex aspects of user management so you can focus on building your application's core features.
+### Who needs SEC Climate Disclosure compliance?
+Public companies are required to report Scope 1 and Scope 2 greenhouse gas emissions as part of SEC Climate Disclosure rules. This includes companies listed on major exchanges that meet specific criteria.
 
-### How do I get started?
+### What are Scope 1 and Scope 2 emissions?
+- **Scope 1**: Direct emissions from sources owned or controlled by the company (e.g., fuel combustion, company vehicles)
+- **Scope 2**: Indirect emissions from purchased electricity, steam, heating, and cooling
 
-1. **Sign up** for an account at [envoyou.com](https://envoyou.com)
-1. **Verify** your email address
-1. **Generate** an API key from your dashboard
-1. **Choose** your preferred SDK or use direct HTTP requests
-1. **Start** integrating with your application
+## Technical Questions
 
-### What programming languages are supported?
+### How do I get started with the API?
+1. Register at [app.envoyou.com](https://app.envoyou.com)
+2. Generate an API key in your dashboard
+3. Start with the `/v1/emissions/calculate` endpoint
+4. Use EPA validation and SEC export features as needed
 
-*We provide official SDKs for:*
-- JavaScript/TypeScript
-- Python
-- Go
+### What authentication methods are supported?
+- **API Key**: For most endpoints (`X-API-Key` header)
+- **JWT Bearer Token**: For user-specific and admin operations (`Authorization: Bearer` header)
 
-*Community SDKs are available for:*
-- PHP
-- Ruby
-- .NET
-- Java
+### What emission factors does the API use?
+The API uses EPA-approved emission factors from official sources including:
+- EPA emission factors for fuel combustion
+- EPA eGRID data for electricity emissions
+- EDGAR global emissions database for reference
 
-You can also use any HTTP client library with our REST API.
+### How accurate are the calculations?
+Our calculations use official EPA emission factors and are designed to meet SEC compliance requirements. All calculations include complete audit trails for regulatory review.
 
-## Authentication
+## Compliance Questions
 
-### What's the difference between API keys and JWT tokens?
+### Does this meet SEC Climate Disclosure requirements?
+Yes, the API is specifically designed to meet SEC Climate Disclosure requirements for Scope 1 and Scope 2 emissions reporting. All calculations include forensic-grade audit trails.
 
-- **API Keys**: Used for server-to-server communication, machine authentication, and accessing public endpoints
-- **JWT Tokens**: Used for user-specific operations, obtained after user authentication, include user identity and permissions
+### What is EPA cross-validation?
+EPA cross-validation compares your calculated emissions against public EPA facility data to detect potential anomalies or discrepancies before filing with the SEC.
 
-### How long do JWT tokens last?
+### What formats are supported for SEC filing?
+The API generates SEC-ready outputs including:
+- JSON format for data integration
+- CSV format for spreadsheet analysis
+- 10-K friendly tables for direct regulatory submission
 
-- **Access Tokens**: 1 hour by default
-- **Refresh Tokens**: 30 days by default
-- Token expiration times can be configured in your account settings
+### How long are audit trails retained?
+Audit trails are retained according to SEC requirements and your subscription tier. Premium and Enterprise tiers include extended retention periods.
 
-### Can I use both API keys and JWT tokens?
-
-Yes! Use API keys for general API access and JWT tokens for user-specific operations. Many endpoints accept both types of authentication.
-
-## API Usage
+## API Usage Questions
 
 ### What are the rate limits?
+Rate limits vary by subscription tier:
+- **Basic**: 30 requests per minute
+- **Premium**: 100 requests per minute  
+- **Enterprise**: 500 requests per minute
 
-*Rate limits vary by your subscription tier:*
+### Can I test the API before purchasing?
+Yes, we offer demo API keys for testing. Contact support or use the demo key generator in the API documentation.
 
-| Tier | Requests per Hour | Requests per Minute |
-|------|------------------|-------------------|
-| Free | 100 | 10 |
-| Basic | 1,000 | 100 |
-| Premium | 10,000 | 1,000 |
-| Enterprise | Custom | Custom |
+### What programming languages are supported?
+The API is language-agnostic and works with any language that can make HTTP requests. We provide examples for:
+- Python
+- JavaScript/Node.js
+- cURL
+- Additional examples available in documentation
 
-### How do I handle rate limiting?
+### How do I handle errors?
+All API responses follow a consistent format:
+```json
+{
+  "status": "success|error",
+  "data": {...},
+  "error": "Error description (if applicable)"
+}
+```
 
-1. **Check response headers** for rate limit information
-1. **Implement exponential backoff** for retries
-1. **Use request queuing** to smooth out traffic
-1. **Monitor your usage** through the dashboard
-1. **Upgrade your plan** if you need higher limits
+Check the `status` field and handle errors appropriately in your application.
 
-### What happens when I exceed rate limits?
+## Data Questions
 
-You'll receive a `429 Too Many Requests` response with a `Retry-After` header indicating when you can retry. The response includes details about your current limits and when they reset.
+### What fuel types are supported?
+Currently supported fuel types include:
+- Natural gas
+- Coal
+- Oil/petroleum products
+- Propane
+- Additional fuel types available upon request
 
-## Billing and Pricing
+### What electricity grid regions are supported?
+We support all major US electricity grid regions:
+- RFC (ReliabilityFirst Corporation)
+- WECC (Western Electricity Coordinating Council)
+- TRE (Texas Regional Entity)
+- SERC (SERC Reliability Corporation)
+- And others as defined by EPA eGRID
 
-### How does billing work?
+### Can I upload my own emission factors?
+Enterprise customers can work with our team to incorporate custom emission factors while maintaining SEC compliance requirements.
 
-- **Free Tier**: 100 requests/hour, no credit card required
-- **Paid Tiers**: Monthly subscription based on usage tier
-- **Enterprise**: Custom pricing based on your specific needs
-- Billing is calculated monthly based on your peak usage
+## Billing Questions
 
-### Can I change my plan anytime?
+### What subscription tiers are available?
+- **Basic**: Free tier with limited requests
+- **Premium**: Full API access with higher limits
+- **Enterprise**: Custom solutions with dedicated support
 
-Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and billing adjusts accordingly.
+### Is there a free trial?
+Yes, all new accounts include access to the Basic tier. Premium features can be tested with demo API keys.
 
-### What payment methods are accepted?
+### How is usage calculated?
+Usage is calculated based on API requests per month. Each calculation, validation, or export request counts toward your monthly quota.
 
-We accept all major credit cards (Visa, MasterCard, American Express) and PayPal. Enterprise customers can arrange for invoicing.
+## Support Questions
 
-## Security
+### How do I get technical support?
+- **Documentation**: Comprehensive guides and examples
+- **Email Support**: support@envoyou.com
+- **Enterprise Support**: Dedicated support channels for Enterprise customers
 
-### Is the API secure?
+### Can you help with SEC compliance implementation?
+Yes, our team can provide guidance on implementing SEC Climate Disclosure requirements using our API. Contact us for consultation services.
 
-Yes, we implement multiple layers of security:
+### Do you provide audit support?
+Enterprise customers receive audit support including documentation review and regulatory compliance guidance.
 
-- **HTTPS Only**: All API communication is encrypted
-- **API Key Authentication**: Secure key-based authentication
-- **JWT Tokens**: Signed tokens with expiration
-- **Rate Limiting**: Protection against abuse
-- **Input Validation**: Comprehensive validation of all inputs
-- **Audit Logging**: Complete logging of all API access
+## Security Questions
 
-### How do I keep my API keys secure?
+### How is my data protected?
+- All data transmission uses HTTPS encryption
+- API keys are securely hashed and stored
+- Audit trails are encrypted at rest
+- SOC 2 compliance for Enterprise customers
 
-- **Never commit API keys** to version control
-- **Use environment variables** to store keys
-- **Rotate keys regularly** (at least quarterly)
-- **Use different keys** for different environments
-- **Monitor key usage** through the dashboard
+### Who has access to my calculation data?
+Only you and authorized users in your organization have access to your calculation data. Envoyou staff cannot access your data without explicit permission.
 
-### What should I do if I suspect a security breach?
+### Is the API GDPR compliant?
+Yes, we follow GDPR requirements for data protection and privacy. Users can request data deletion and export as needed.
 
-1. **Immediately rotate** your API keys
-1. **Contact support** with details
-1. **Review access logs** for suspicious activity
-1. **Update all client applications** with new keys
+## Integration Questions
 
-## Integration
+### Can I integrate with existing ERP systems?
+Yes, the API is designed for easy integration with existing systems. We provide webhooks and bulk processing capabilities for Enterprise customers.
 
-### Can I use Envoyou with my existing user database?
+### Do you offer SDKs or libraries?
+We provide code examples and are developing official SDKs for popular programming languages. Contact us for specific SDK requirements.
 
-Yes! You can migrate existing users or keep your current system and use Envoyou alongside it. We provide migration tools and detailed guides.
+### Can I white-label the solution?
+Enterprise customers can discuss white-label and custom branding options with our team.
 
-### How do I migrate existing users?
+---
 
-1. **Export user data** from your current system
-1. **Use our bulk import API** to create users
-1. **Update your application** to use Envoyou authentication
-1. **Test thoroughly** before going live
-1. **Gradually migrate** users to avoid disruption
-
-### What webhooks are available?
-
-We support webhooks for:
-- User events (created, updated, deleted)
-- Authentication events (login, logout, failed attempts)
-- API usage events (rate limits, quota exceeded)
-- System events (maintenance, incidents)
-
-## Troubleshooting
-
-### Why am I getting 401 Unauthorized errors?
-
-Common causes:
-- **Invalid API key**: Check your key is correct and active
-- **Expired JWT token**: Refresh your token
-- **Wrong authentication method**: Some endpoints require specific auth types
-- **Missing permissions**: Your account may not have access to that endpoint
-
-### Why am I getting 429 Rate Limit errors?
-
-- **High request volume**: You're exceeding your tier's limits
-- **Inefficient code**: Making too many requests in a short time
-- **Not handling retries**: Previous failed requests may be retrying too quickly
-
-### Why are my requests timing out?
-
-Possible causes:
-- **Network issues**: Check your internet connection
-- **Large payloads**: Break large requests into smaller chunks
-- **Server overload**: Try again later or contact support
-- **Incorrect timeout settings**: Adjust your client timeout settings
-
-## Account Management
-
-### How do I reset my password?
-
-1. Go to the login page
-1. Click "Forgot Password"
-1. Enter your email address
-1. Check your email for reset instructions
-1. Follow the link to set a new password
-
-### How do I update my account information?
-
-**You can update your account details through the dashboard:**
-- Email address
-- Password
-- Billing information
-- API settings
-- Webhook configurations
-
-### How do I delete my account?
-
-Account deletion is permanent and removes all associated data. Contact support to initiate account deletion. This process requires verification and a waiting period.
-
-## Technical Support
-
-### What support options are available?
-
-- **Documentation**: Comprehensive guides and API reference
-- **Community Forum**: Get help from other developers
-- **Email Support**: Response within 24 hours
-- **Priority Support**: Available for paid tiers
-- **Phone Support**: Available for enterprise customers
-
-### How do I report a bug?
-
-1. **Check existing issues** in our GitHub repository
-1. **Create a new issue** with detailed information:
-   - Steps to reproduce
-   - Expected vs actual behavior
-   - API endpoint and request details
-   - Error messages and codes
-   - Your environment (SDK version, language, etc.)
-
-### How do I request a new feature?
-
-1. **Check our roadmap** to see if it's already planned
-1. **Create a feature request** on GitHub
-1. **Provide detailed requirements** and use cases
-1. **Engage with the community** to gauge interest
-
-## Compliance and Legal
-
-### Is Envoyou GDPR compliant?
-
-**Yes, we are fully GDPR compliant. We provide:**
-- Data processing agreements
-- Right to erasure (data deletion)
-- Data portability
-- Privacy by design principles
-
-### Do you comply with SOC 2?
-
-Yes, we maintain SOC 2 Type II compliance, which covers security, availability, and confidentiality of customer data.
-
-### Where is my data stored?
-
-Data is stored in secure, SOC 2 compliant data centers in the US. Enterprise customers can request specific data residency options.
-
-### What is your data retention policy?
-
-- **User data**: Retained until account deletion or as required by law
-- **API logs**: Retained for 90 days for security and debugging
-- **Analytics data**: Aggregated and anonymized after 24 months
-
-## Advanced Topics
-
-### Can I use Envoyou for single sign-on (SSO)?
-
-Yes! We support SAML and OAuth 2.0 for enterprise SSO integrations. [Contact](https:envoyou.com/contact) our enterprise team for setup assistance.
-
-### Do you support multi-tenant applications?
-
-Yes, our API is designed to support multi-tenant applications with proper tenant isolation and access controls.
-
-### Can I customize the authentication flow?
-
-**Yes, we offer extensive customization options:**
-- Custom login pages
-- Additional user fields
-- Custom validation rules
-- Integration with third-party identity providers
-
-### What about mobile applications?
-
-**Our API works seamlessly with mobile apps. We provide:**
-- Mobile-optimized SDKs
-- Offline token storage
-- Biometric authentication support
-- Push notification integration
-
-If you don't find your question answered here, please check our [documentation](https://docs.envoyou.com) or [contact](https:envoyou.com/contact) our support team.
+**Still have questions?** Contact our support team at [support@envoyou.com](mailto:support@envoyou.com) or visit our [support portal](https://app.envoyou.com/support).

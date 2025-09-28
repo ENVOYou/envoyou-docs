@@ -4,32 +4,37 @@ sidebar_position: 2
 
 # Introduction
 
-## What is ENVOYOU?
-**ENVOYOU** is an integrated platform designed to address challenges in accessing verified and reliable environmental data. Amidst the growing need for accurate environmental information for decision-making—from ESG (Environmental, Social, and Governance) investments to public policy—ENVOYOU provides a solution for easy and efficient access through modern APIs (Application Programming Interfaces).
+## What is Envoyou SEC API?
+**Envoyou SEC API** is a specialized backend service designed to address the specific challenges of **SEC Climate Disclosure compliance**. With the SEC's new climate disclosure rules requiring public companies to report Scope 1 and Scope 2 greenhouse gas emissions, Envoyou SEC API provides the infrastructure needed for accurate, auditable, and compliant emissions reporting.
 
 ## Our Vision, Mission, and Goals
 ### Vision
-To become the world's most trusted and accessible source of verified environmental data, empowering decision-making that has a positive impact on planetary sustainability.
+To become the leading API platform for SEC Climate Disclosure compliance, enabling public companies to meet regulatory requirements with confidence and accuracy.
 
 ### Mission
-To integrate environmental data from various global and national sources, perform verification to ensure accuracy, and provide easy and efficient access through modern APIs to support innovators, researchers, and policymakers.
+To provide auditable greenhouse gas emissions calculation, EPA cross-validation, and SEC-ready export capabilities through a secure, reliable API that simplifies compliance for public companies and their service providers.
 
 ### Goals
-- **Comprehensive Data Aggregation:** Continuously collect and unify environmental data from key sources at global and national levels.
-- **Superior API Provision:** Develop reliable, fast, and flexible APIs that can overcome technical limitations found on other platforms.
-- **Building Trust:** Implement transparent and robust data verification processes to ensure every piece of information presented has the highest credibility.
-- **Driving Innovation:** Facilitate the development of applications, research, and new solutions in sustainability by providing solid and easily integrable data foundations.
+- **SEC Compliance Focus:** Specifically designed for Scope 1 & 2 emissions reporting as required by SEC Climate Disclosure rules.
+- **Forensic-Grade Traceability:** Every calculation includes complete audit trails with inputs, factors, sources, and timestamps.
+- **EPA Cross-Validation:** Automatic comparison with public EPA data to detect anomalies before filing.
+- **SEC-Ready Exports:** Generate 10-K friendly JSON/CSV outputs for direct regulatory submission.
+- **Production Reliability:** Secure, auditable, and easy to operate with CI/CD and versioned migrations.
 
 ### Problems We Solve
-Currently, environmental data is highly fragmented. Data is scattered across various research institutions, organizations, and government agencies with different formats, structures, and access methods. Users often face challenges such as:
-- **Scattered Data:** Difficulty collecting data from various unconnected sources.
-- **Technical Limitations:** Many existing APIs have strict limitations, such as limits on the number of data rows per request or complex queries.
-- **Limited Access:** Difficulty accessing historical data or performing mass data downloads, especially from national data sources.  
-ENVOYOU bridges this gap by acting as an intelligent aggregator that unifies fragmented data into one cohesive and easily accessible platform.
+SEC Climate Disclosure compliance presents unique challenges for public companies:
+- **Regulatory Complexity:** Understanding and implementing Scope 1 & 2 calculation requirements.
+- **Audit Requirements:** Maintaining forensic-grade documentation for regulatory review.
+- **Data Validation:** Ensuring emissions calculations align with EPA public data.
+- **Filing Preparation:** Converting calculations into SEC-acceptable formats for 10-K submissions.
+- **Operational Burden:** Managing the technical infrastructure needed for compliant reporting.
 
-### ENVOYOU's Three Main Pillars
-**The core values of the ENVOYOU project are supported by three main pillars:**
-- **Credibility:** We prioritize data reliability through rigorous verification processes, so you can trust the information you use.
-- **Environmental Relevance:** Our focus is providing comprehensive and relevant environmental data to support sustainability projects, research, and regulatory compliance.
-- **Technological Innovation:** By providing reliable modern APIs, we ensure developers and analysts can easily integrate environmental data into their applications and workflows.  
-This documentation will guide you to understand how the ENVOYOU API works, access the data you need, and start building more sustainable applications.
+Envoyou SEC API solves these challenges by providing a purpose-built platform that handles the technical complexity while ensuring regulatory compliance.
+
+### Envoyou SEC API's Core Pillars
+**Our SEC compliance platform is built on three fundamental pillars:**
+- **Regulatory Compliance:** Purpose-built for SEC Climate Disclosure requirements with built-in validation and audit capabilities.
+- **Forensic Traceability:** Complete audit trails for every calculation, ensuring transparency and accountability for regulatory review.
+- **Production Reliability:** Enterprise-grade security, authentication, and operational capabilities designed for public company requirements.
+
+This documentation will guide you through implementing SEC-compliant emissions reporting, understanding our audit capabilities, and integrating with your existing compliance workflows.
