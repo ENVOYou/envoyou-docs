@@ -1,5 +1,6 @@
 export default {
   "0058b4c6": [() => import(/* webpackChunkName: "0058b4c6" */ "@generated/docusaurus-plugin-content-docs/default/p/docs-175.json"), "@generated/docusaurus-plugin-content-docs/default/p/docs-175.json", require.resolveWeak("@generated/docusaurus-plugin-content-docs/default/p/docs-175.json")],
+  "02eeb3bd": [() => import(/* webpackChunkName: "02eeb3bd" */ "@site/../docs/agents-overview.md"), "@site/../docs/agents-overview.md", require.resolveWeak("@site/../docs/agents-overview.md")],
   "17896441": [() => import(/* webpackChunkName: "17896441" */ "@theme/DocItem"), "@theme/DocItem", require.resolveWeak("@theme/DocItem")],
   "1d57131a": [() => import(/* webpackChunkName: "1d57131a" */ "@site/../docs/api-reference.md"), "@site/../docs/api-reference.md", require.resolveWeak("@site/../docs/api-reference.md")],
   "23a4bd47": [() => import(/* webpackChunkName: "23a4bd47" */ "@site/../docs/api/authentication.md"), "@site/../docs/api/authentication.md", require.resolveWeak("@site/../docs/api/authentication.md")],
@@ -23,6 +24,7 @@ export default {
   "a7456010": [() => import(/* webpackChunkName: "a7456010" */ "@generated/docusaurus-plugin-content-pages/default/__plugin.json"), "@generated/docusaurus-plugin-content-pages/default/__plugin.json", require.resolveWeak("@generated/docusaurus-plugin-content-pages/default/__plugin.json")],
   "a7bd4aaa": [() => import(/* webpackChunkName: "a7bd4aaa" */ "@theme/DocVersionRoot"), "@theme/DocVersionRoot", require.resolveWeak("@theme/DocVersionRoot")],
   "a94703ab": [() => import(/* webpackChunkName: "a94703ab" */ "@theme/DocRoot"), "@theme/DocRoot", require.resolveWeak("@theme/DocRoot")],
+  "aa147774": [() => import(/* webpackChunkName: "aa147774" */ "@site/../docs/agents-api-reference.md"), "@site/../docs/agents-api-reference.md", require.resolveWeak("@site/../docs/agents-api-reference.md")],
   "aba21aa0": [() => import(/* webpackChunkName: "aba21aa0" */ "@generated/docusaurus-plugin-content-docs/default/__plugin.json"), "@generated/docusaurus-plugin-content-docs/default/__plugin.json", require.resolveWeak("@generated/docusaurus-plugin-content-docs/default/__plugin.json")],
   "b7224e2e": [() => import(/* webpackChunkName: "b7224e2e" */ "@site/../docs/migration-map.md"), "@site/../docs/migration-map.md", require.resolveWeak("@site/../docs/migration-map.md")],
   "b9d6e0d0": [() => import(/* webpackChunkName: "b9d6e0d0" */ "@site/../docs/guides/user-applications.mdx"), "@site/../docs/guides/user-applications.mdx", require.resolveWeak("@site/../docs/guides/user-applications.mdx")],

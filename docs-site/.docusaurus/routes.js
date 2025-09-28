@@ -4,16 +4,26 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 export default [
   {
     path: '/docs',
-    component: ComponentCreator('/docs', 'a10'),
+    component: ComponentCreator('/docs', 'd5e'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '91b'),
+        component: ComponentCreator('/docs', '285'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '01f'),
+            component: ComponentCreator('/docs', '8eb'),
             routes: [
+              {
+                path: '/docs/agents-api-reference',
+                component: ComponentCreator('/docs/agents-api-reference', 'c9b'),
+                exact: true
+              },
+              {
+                path: '/docs/agents-overview',
+                component: ComponentCreator('/docs/agents-overview', '1a8'),
+                exact: true
+              },
               {
                 path: '/docs/api-reference',
                 component: ComponentCreator('/docs/api-reference', 'deb'),

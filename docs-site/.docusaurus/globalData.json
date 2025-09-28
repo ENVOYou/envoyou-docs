@@ -11,6 +11,14 @@
           "mainDocId": "intro",
           "docs": [
             {
+              "id": "agents-api-reference",
+              "path": "/docs/agents-api-reference"
+            },
+            {
+              "id": "agents-overview",
+              "path": "/docs/agents-overview"
+            },
+            {
               "id": "api-reference",
               "path": "/docs/api-reference"
             },
